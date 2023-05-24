@@ -1,0 +1,75 @@
+package hello.hellospring.repository;
+
+import hello.hellospring.domain.Member;
+import org.junit.jupiter.api.AfterEach;
+//import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
+
+// 테스트 메서드들은 무작위로 실행되므로 순서 의존적으로 설계 X
+// cf. TDD(Test Driven Development): 테스트 코드를 먼저 만들고 그에 맞추어 클래스들을 구현하는 방식
+class MemoryMemberRepositoryTest {
+
+    MemoryMemberRepository repository = new MemoryMemberRepository();
+
+    @AfterEach
+    public void afterEach() {
+        repository.clearStore();
+    }
+
+    @Test
+    void save() {
+        // given
+        Member member = new Member();
+        member.setName("spring");
+
+        // when
+        repository.save(member);
+
+        // then
+        Member result = repository.findById(member.getId()).get();
+        /*System.out.println("result = " + (result == member));
+        Assertions.assertEquals(member, result);
+        Assertions.assertEquals(member, null);*/
+        assertThat(result).isEqualTo(member);
+    }
+
+    @Test
+    void findByName() {
+        // given
+        Member member1 = new Member();
+        member1.setName("spring1");
+        repository.save(member1);
+
+        Member member2 = new Member();
+        member2.setName("spring2");
+        repository.save(member2);
+
+        // when
+        Member result = repository.findByName("spring1").get();
+
+        // then
+        assertThat(result).isEqualTo(member1);
+    }
+
+    @Test
+    void findAll() {
+        // given
+        Member member1 = new Member();
+        member1.setName("spring1");
+        repository.save(member1);
+
+        Member member2 = new Member();
+        member2.setName("spring2");
+        repository.save(member2);
+
+        // when
+        List<Member> result = repository.findAll();
+
+        // then
+        assertThat(result.size()).isEqualTo(2);
+    }
+}
