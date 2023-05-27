@@ -10,7 +10,12 @@ import java.util.Optional;
 // Service 클래스에서는 일반적으로 비즈니스 로직에 어울리는 메서드명을 사용
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    // MemberService의 constructor를 사용하여 외부에서 MemberRepository를 넣어주는 것을 DI(Dependency Injection)이라 한다.
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     public Long join(Member member) {
         validateDuplicateMember(member);
