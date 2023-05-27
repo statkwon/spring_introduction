@@ -17,7 +17,7 @@
 - 클라이언트의 HTTP Accept Header와 서버의 컨트롤러 반환 타입 정보를 조합하여 `HttpMessageConverter`가 선택된다.
 
 ## 회원 관리 예제 - 백엔드 개발
-### 비즈니스 요구사항 정리
+### 일반적인 웹 애플리케이션 계층 구조
 <img width="735" alt="fig4" src="https://github.com/statkwon/spring_introduction_study/assets/118699337/83ebf63b-19fc-4237-8b8b-951ec921c912"><br>
 - Controller: 웹 MVC의 컨트롤러 역할
 - Service: 핵심 비즈니스 로직
