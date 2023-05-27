@@ -1,5 +1,7 @@
 # 스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술
 ## 프로젝트 환경설정
+### 라이브러리 살펴보기
+- Gradle, Maven 등의 툴이 라이브러리 간 의존관계를 자동으로 관리해준다.
 ### Welcome Page 만들기
 - Spring Boot supports both static and templated welcome pages. It first looks for an `index.html` file in the configured static content locations. If one is not found, it then looks for an `index` template. If either is found, it is automatically used as the welcome page of the application.
 
