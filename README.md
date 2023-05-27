@@ -15,3 +15,11 @@
 - `@Responsebody`를 사용하면 `viewResolver`를 사용하지 않고, `HttpMessageConverter`가 동작하여 HTTP의 Body에 문자 내용을 직접 반환한다.
 - 기본 문자 처리는 `StringHttpMessageConverter`가, 기본 객체 처리는 `MappingJackson2HttpMessageConverter`가 담당한다.
 - 클라이언트의 HTTP Accept Header와 서버의 컨트롤러 반환 타입 정보를 조합하여 `HttpMessageConverter`가 선택된다.
+
+## 회원 관리 예제 - 백엔드 개발
+### 비즈니스 요구사항 정리
+<img width="735" alt="fig4" src="https://github.com/statkwon/spring_introduction_study/assets/118699337/83ebf63b-19fc-4237-8b8b-951ec921c912"><br>
+- Controller: 웹 MVC의 컨트롤러 역할
+- Service: 핵심 비즈니스 로직
+- Repository: 데이터베이스에 접근, 도메인 객체를 DB에 저장하고 관리
+- Domain: 비즈니스 도메인 객체 (ex. 회원, 주문, 쿠폰 등)
