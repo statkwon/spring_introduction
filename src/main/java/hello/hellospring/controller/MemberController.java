@@ -11,6 +11,18 @@ public class MemberController {
     private final MemberService memberService;
 
     // 여러 컨트롤러에서 MemberService를 공유할 수 있으므로 매번 새로운 인스턴스를 생성할 필요가 없음 -> 스프링 컨테이너에 MemberService를 등록하여 사용
+
+    // Dependency Injection
+    // 1. Field Injection
+//    @Autowired private MemberService memberService;
+
+    // 2. Setter Injection
+//    @Autowired
+//    public void setMemberService(MemberService memberService) {
+//        this.memberService = memberService;
+//    }
+
+    // 3. Constructor Injection
     @Autowired // MemberController가 생성될 때 생성자에 @Autowired가 붙어 있으면 스프링 컨테이너 안에 있는 MemberService를 연결해 줌
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
