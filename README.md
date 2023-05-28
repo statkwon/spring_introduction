@@ -32,3 +32,10 @@
 - `@Component`를 포함하는 `@Controller`, `@Service`, `@Repository`도 스프링 빈으로 자동 등록된다. 
 - DI(Dependency Injection): 생성자에 `@Autowired`가 있으면 스프링이 연관된 객체를 스프링 컨테이너에서 찾아서 넣어준다. 이때 생성자가 한 개만 있는 경우에는 `@Autowired`를 생략할 수 있다.
 - 스프링은 스프링 컨테이너에 스프링 빈을 등록할 때 기본적으로 싱글톤으로 등록한다. 따라서 같은 스프링 빈이면 모두 같은 인스턴스이다. 싱글톤이 아니게 설정할 수 있지만, 특별한 경우를 제외하면 대부분 싱글톤을 사용한다.
+- DI에는 Field Injection, Setter Injection, Constructor Injection의 세 가지 방식이 있다.
+  - Field Injection: 변경의 여지가 없으므로 비추
+  - Setter Injection: Setter를 `public`으로 열어둬야 하므로 비추
+### 자바 코드로 직접 스프링 빈 등록하기
+- 실무에서는 주로 정형화된 Controller, Service, Repository 같은 코드는 컴포넌트 스캔을 사용한다.
+- 정형화되지 않거나 상황에 따라 구현 클래스를 변경해야 하는 경우에는 설정을 통해 스프링 빈으로 등록한다.
+- `@Autowired`를 통한 DI는 스프링이 관리하는 객체에서만 동작한다. 스프링 빈으로 등록하지 않고 직접 생성한 객체에서는 동작하지 않는다. (ex. `java/demo/Demo.class`에서 동작 X)
