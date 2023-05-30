@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class JdbcMemberRepository implements MemberRepository {
 
+    // DB Connection을 획득할 때 사용하는 객체, 스프링 부트가 DB Connection 정보를 바탕으로 생성하고 스프링 빈으로 등록해두기 때문에 DI 받을 수 있음
     private final DataSource dataSource;
 
     public JdbcMemberRepository(DataSource dataSource) {
