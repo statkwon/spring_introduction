@@ -39,3 +39,25 @@
 - 실무에서는 주로 정형화된 Controller, Service, Repository 같은 코드는 컴포넌트 스캔을 사용한다.
 - 정형화되지 않거나 상황에 따라 구현 클래스를 변경해야 하는 경우에는 설정을 통해 스프링 빈으로 등록한다.
 - `@Autowired`를 통한 DI는 스프링이 관리하는 객체에서만 동작한다. 스프링 빈으로 등록하지 않고 직접 생성한 객체에서는 동작하지 않는다. (ex. `java/demo/Demo.class`에서 동작 X)
+
+## 스프링 DB 접근 기술
+<img width="735" alt="fig5" src="./figures/fig5.png"><br>
+- OCP(Open-Closed Principle): 스프링의 DI를 사용하면 기존 코드를 전혀 손대지 않고, 설정만으로 구현 클래스를 변경할 수 있다.
+### 순수 JDBC
+- Java는 DB와 연동하기 위해서 JDBC 드라이버가 필요하다.
+- `DataSource`는 DB Connection을 획득할 때 사용하는 객체이다. 스프링 부트가 DB Connection 정보를 바탕으로 `DataSource`를 생성하고 스프링 빈으로 등록해두기 때문에 DI 받을 수 있다.
+### 스프링 통합 테스트
+- `@SpringBootTest` 어노테이션이 있으면 스프링 컨테이너와 테스트를 함께 실행한다.
+- 테스트 케이스에 `@Transactional` 어노테이션이 있으면 테스트 시작 전에 트랜잭션을 시작하고, 테스트 완료 후에 항상 롤백한다. 이렇게 하면 DB에 데이터가 남지 않으므로 다음 테스트에 영향을 주지 않는다. 
+- Unit Test가 좋은 테스트이므로 가급적 Unit Test를 사용하는 것이 좋다.
+### JPA
+- JPA는 표준 인터페이스이고, 이를 구현한 것 중 대표적인 것이 Hibernate이다.
+- JPA는 ORM(Object Relational Mapping) 기술로, 객체와 RDBMS를 연결한다.
+- `build.gradle`
+  - `spring-boot-starter-data-jpa`는 내부에 JDBC 관련 라이브러리를 포함하므로 별도로 JDBC 관련 라이브러리를 추가할 필요가 없다.
+- `resources/application.properties`
+  - `spring.jpa.show-sql`: JPA가 생성하는 SQL을 출력할지 여부 설정
+  - `spring.jpa.hibernate.ddl-auto`: 엔티티 정보를 바탕으로 테이블을 자동 생성할지 여부 설정
+- JPA를 통한 모든 데이터 변경은 트랜잭션 안에서 실행해야 한다. 스프링은 `@Transactional` 어노테이션이 있는 클래스의 메서드를 실행할 때 트랜잭션을 시작하고, 메서드가 정상 종료되면 트랜잭션을 커밋, 런타임 예외가 발생하면 롤백한다.
+### 스프링 데이터 JPA
+- `findBy~()`와 같은 형태로 메서드명을 작성하면 스프링 데이터 JPA가 `SELECT m FROM Member m WHERE m.~ = ?`와 같은 JPQL을 작성해준다.
