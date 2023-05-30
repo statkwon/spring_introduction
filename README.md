@@ -53,3 +53,8 @@
 - JPA를 통한 모든 데이터 변경은 트랜잭션 안에서 실행해야 한다. 스프링은 `@Transactional` 어노테이션이 있는 클래스의 메서드를 실행할 때 트랜잭션을 시작하고, 메서드가 정상 종료되면 트랜잭션을 커밋, 런타임 예외가 발생하면 롤백한다.
 ### 스프링 데이터 JPA
 - `findBy~()`와 같은 형태로 메서드명을 작성하면 스프링 데이터 JPA가 `SELECT m FROM Member m WHERE m.~ = ?`와 같은 JPQL을 작성해준다.
+
+## AOP
+<img width="735" alt="fig6" src="./figures/fig6.png"><br>
+- Aspect Oriented Programming
+- 공통 관심 사항(Cross-Cutting Concern)과 핵심 관심 사항(Core Concern)을 분리
